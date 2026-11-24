@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0c0b10;
+  --color-surface: #16141c;
+  --color-raised: #1e1b26;
+  --color-line: #2c2836;
+  --color-paper: #f4efe4;
+  --color-muted: #a59f95;
+  --color-gold: #f2b84b;
+  --color-gold-deep: #c98f22;
+  --color-curtain: #d9473b;
+  --color-ok: #57c78a;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bebas Neue", "Impact", ui-sans-serif, sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+}
+
+/* Subtle film-grain vignette behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgb(242 184 75 / 0.10), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgb(217 71 59 / 0.06), transparent 70%);
+}
+
+/* Row of marquee bulbs, used on the hero sign */
+.marquee-bulbs {
+  background-image: radial-gradient(circle, var(--color-gold) 0 2.5px, transparent 3px);
+  background-size: 18px 8px;
+  background-repeat: repeat-x;
+  background-position: center;
+  height: 8px;
+  filter: drop-shadow(0 0 4px rgb(242 184 75 / 0.7));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-bulbs {
+    animation: bulbs 1.6s steps(2) infinite;
+  }
+  @keyframes bulbs {
+    50% { opacity: 0.55; }
+  }
+}
+
+.input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-line);
+  background: var(--color-ink);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-paper);
+}
+.input:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 1px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 150ms, color 150ms, border-color 150ms, transform 100ms;
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-gold { background: var(--color-gold); color: var(--color-ink); }
+.btn-gold:hover:not(:disabled) { background: #f7c96d; }
+.btn-ghost { border: 1px solid var(--color-line); color: var(--color-paper); }
+.btn-ghost:hover:not(:disabled) { border-color: var(--color-muted); }
+.btn-danger { border: 1px solid rgb(217 71 59 / 0.5); color: #f08a80; }
+.btn-danger:hover:not(:disabled) { background: rgb(217 71 59 / 0.12); }
+
+.label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
